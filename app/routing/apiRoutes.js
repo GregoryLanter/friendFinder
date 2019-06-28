@@ -3,11 +3,11 @@ const router = express.Router();
 let friendMod = require("../data/friends.js")
 
 
-router.get("/friends", function (req, res) {
+router.get("/api/friends", function (req, res) {
     return res.json(friendMod.getIt());
 });
 
-router.post("/friends", function (req, res) {
+router.post("/api/friends", function (req, res) {
     let bestie = friendMod.addIt(req.body);
     console.log("========================================================")
     console.log("bestie");

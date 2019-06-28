@@ -1,31 +1,35 @@
 let express = require("express");
 let path = require("path");
-const apiRoutes = require("./app/routing/apiRoutes.js");
-const htmlRoutes = require("./app/routing/htmlRoutes.js")
 
 let app = express();
 let PORT = process.env.port || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+console.log(path.join(__dirname, "/app"));
+app.use(express.static(path.join(__dirname, "/app")))
+//const apiRoutes = require("./app/routing/apiRoutes.js");
+//const htmlRoutes = require("./app/routing/htmlRoutes.js")
+const apiRoutes = require("./app/routing/apiRoutes.js");
+const htmlRoutes = require("./app/routing/htmlRoutes.js");
 
 
-
-
-//html routes
-//app.use("/", htmlRoutes);
+app.use("/", htmlRoutes);
+app.use("/", apiRoutes);
+/*//html routes
+app.use("/", htmlRoutes);
 app.get("/survey", function(req,res){
-    res.sendFile(path.join(__dirname,"survey.html"))
+    res.sendFile(path.join(__dirname,"/app/public/survey.html"))
 });
 
 app.get("/", function(req,res){
     res.sendFile(path.join(__dirname, "/app/public/home.html"))
-});
+});*/
 
 
 //api routes
-app.use("/api", apiRoutes);
-app.use(express.static("resources"));
+//app.use("/api", apiRoutes);
+//app.use(express.static("resources"));
 
 /*app.get("/api/friends", function (req, res) {
     return res.json(friendArr)
