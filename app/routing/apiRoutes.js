@@ -7,27 +7,15 @@ router.get("/friends", function (req, res) {
     return res.json(friendMod.getIt());
 });
 
-router.post("/api/friends", function (req, res) {
-    console.log(req.body)
-    newFriend = {
-        "name": "Joey",
-        "photo": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
-        "scores": [
-            5,
-            1,
-            4,
-            4,
-            5,
-            1,
-            2,
-            5,
-            4,
-            1
-        ]
-    }
+router.post("/friends", function (req, res) {
+    let bestie = friendMod.addIt(req.body);
+    console.log("========================================================")
+    console.log("bestie");
+    console.log(bestie);
+    console.log("========================================================")
 
-    friendMod.addIt(newFriend);
-    res.end;
+
+    res.json(bestie);
 });
 
 module.exports = router;

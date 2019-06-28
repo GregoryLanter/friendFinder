@@ -1,6 +1,7 @@
 let express = require("express");
 let path = require("path");
 const apiRoutes = require("./app/routing/apiRoutes.js");
+const htmlRoutes = require("./app/routing/htmlRoutes.js")
 
 let app = express();
 let PORT = process.env.port || 8080;
@@ -10,13 +11,15 @@ app.use(express.json());
 
 
 
+
 //html routes
+//app.use("/", htmlRoutes);
 app.get("/survey", function(req,res){
     res.sendFile(path.join(__dirname,"survey.html"))
 });
 
 app.get("/", function(req,res){
-    res.sendFile(path.join(__dirname, "home.html"))
+    res.sendFile(path.join(__dirname, "/app/public/home.html"))
 });
 
 
