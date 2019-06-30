@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--Head section where we include or system type files bootstrap, font awesome jQuery-->
 <head>
   <meta charset="UTF-8">
   <title>Friend Finder SURVEY.HTML</title>
@@ -10,6 +11,7 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <!--<link rel="stylesheet" type="text/css" href=".\style.css">-->
+  <!--Styles for my page not mush its pretty basic-->
   <style>
     h4 {
       margin-bottom: 15px
@@ -23,6 +25,7 @@
       margin-bottom: 20px
     }
 
+    /*Styling for our modal pop up*/
     .modal {
       display: none;
       /* Hidden by default */
@@ -76,7 +79,7 @@
   </style>
 
 <body>
-
+  <!--HTML here you fill in a couple text boxes and some drop down questions then hot submit-->
   <div class="container">
     <h2>
       Survey Questions
@@ -290,12 +293,15 @@
   </div>
 
   <script type="text/javascript">
+    /*submit button will grab the data entered on the screen*/
     $("#submit").on("click", function (event) {
       event.preventDefault();
       var qArr = [];
+      /* get teh answers from the question dropdowns*/
       for (var i = 1; i < 11; i++) {
         qArr.push(parseInt($("#q" + i).val().trim()));
       }
+      //set up the  survey object to pass it to the function
       var newSurvey = {
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
@@ -303,22 +309,27 @@
       };
 
       // Question: What does this code do??
+      //this will send out the object we just created to the server side
       $.post("/api/friends", newSurvey)
         .then(function (data) {
+          // wehn we return from the server side pop up our modal and display our bestie
           var modal = document.getElementById('myModal');
           console.log("add.html", data);
-          alert("Adding character...");
+          //get teh name field and add name from the data
           var name = document.getElementById('displayName');
           name.innerText = data.name;
+          //now add the picture
           var picture = document.getElementById('picture');
           picture.setAttribute("src", data.photo);
 
           modal.style.display = "block";
         });
     });
+    //close button click
     $("#close").on("click", function (event) {
       event.preventDefault();
       document.getElementById('myModal').style.display = "none";
+      //clear out the values so the next entry can start clean
       $("#name").val("");
       $("#photo").val("");
       for (var i = 1; i < 11; i++) {

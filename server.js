@@ -1,12 +1,16 @@
+/// hey I need  express and path
 let express = require("express");
 let path = require("path");
 
 let app = express();
+
+//get a port to run default to 8080
 let PORT = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 console.log(path.join(__dirname, "/app"));
+
 app.use(express.static(path.join(__dirname, "/app")))
 //const apiRoutes = require("./app/routing/apiRoutes.js");
 //const htmlRoutes = require("./app/routing/htmlRoutes.js")
